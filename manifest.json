@@ -1,10 +1,10 @@
 {
-	"id": "obsidian-sample-plugin",
-	"name": "Sample Plugin",
-	"version": "1.0.1",
+	"id": "obsidian-url-scheme-helper",
+	"name": "Obsidian URL Scheme Helper",
+	"version": "1.0.0",
 	"minAppVersion": "0.9.12",
-	"description": "This is a sample plugin for Obsidian. This plugin demonstrates some of the capabilities of the Obsidian API.",
-	"author": "Obsidian",
-	"authorUrl": "https://obsidian.md/about",
+	"description": "Plugin to help create links based off of URL schemes, such as making links to open apps such as Maps (with an address), or a telephone number, or anything else.",
+	"author": "Kjell Connelly",
+	"authorUrl": "https://github.com/KjellConnelly/obsidian-url-scheme-helper",
 	"isDesktopOnly": false
 }
