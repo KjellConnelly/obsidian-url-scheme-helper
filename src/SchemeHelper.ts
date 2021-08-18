@@ -5,23 +5,19 @@ export default class SchemeHelper {
 
   }
 
-  public convertToMarkdown(options : {
-    text? : string,
-    type: URLSchemeType,
-    userInput: any,
-  }) {
-    const { text, type, userInput } = options
-    const url = this.convertToURL({type, userInput})
-    const urlWithMarkdown = this.addMarkdownToLink({text, url})
-    return urlWithMarkdown
-  }
-
-  private convertToURL(options : {
+  public convertToURL(options : {
+    title?: string,
   	type: URLSchemeType,
   	userInput: any,
   }) {
+    const title = options.title || ""
   	const {type, userInput} = options
   	let s = type.format.trim()
+
+    // convert title
+    s = s.replace("{title}", title.trim())
+
+    // convert other parameters
   	type.parameters.forEach((typeParameter, i)=>{
   		const parameterSyntax = "{" + typeParameter.name + "}"
   		const stringHasParameter = s.includes(parameterSyntax)
@@ -35,7 +31,7 @@ export default class SchemeHelper {
 
         // check if there is a callback
         if (typeParameter.onFormat != undefined) {
-          userInputString = typeParameter.onFormat(userInputString, type.parameters, i)
+          userInputString = typeParameter.onFormat(userInputString, userInput, type.parameters, i)
         }
 
         // encode and replace
@@ -44,14 +40,5 @@ export default class SchemeHelper {
   		}
   	})
   	return s
-  }
-
-  private addMarkdownToLink(options : {
-    text?: string,
-    url:string,
-  }) {
-    const { text, url } = options
-    const newText = text == undefined ? "" : text.trim()
-    return `[${newText || ""}](${url})`
   }
 }

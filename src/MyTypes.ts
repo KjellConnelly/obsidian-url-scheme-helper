@@ -13,5 +13,5 @@ export type ParameterType = {
 	encodeURIComponent? : boolean,
 	optional? : boolean,
 	defaultValue? : any,
-	onFormat? : (param:any,parameters?:Array<any>,i?:number)=>any,
+	onFormat? : (param:any,userInput?:any,parameters?:Array<any>,i?:number)=>any,
 }
