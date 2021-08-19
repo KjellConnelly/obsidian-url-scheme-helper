@@ -66,7 +66,7 @@ export const appleMapsType : URLSchemeType = {
     placeholder:'1600 Pennsylvania Avenue, Washington, D.C., USA',
     encodeURIComponent: false,
     optional:true,
-    onFormat:(endAddress:string, parameters:Array<ParameterType>, i:number)=>{
+    onFormat:(endAddress:string)=>{
       return endAddress ? `&daddr=${encodeURIComponent(endAddress)}` : ""
     },
   }]
@@ -92,7 +92,7 @@ export const textMessageType : URLSchemeType = {
     type: 'string',
     placeholder:'703-996-2200',
   }, {
-    name : 'message',
+    name: 'message',
     type: 'string',
     placeholder:'Hi!',
   }]
@@ -115,6 +115,34 @@ export const calendarType : URLSchemeType = {
     },
   }]
 }
+
+export const iOSShortcutType : URLSchemeType = {
+  name: 'Run iOS Shortcut',
+  description: `Runs a shortcut in iOS`,
+  format: '[{title}](shortcuts://run-shortcut?name={shortcutName}{input}',
+  parameters: [{
+    name : 'shortcutName',
+    type: 'string',
+    placeholder:'Home ETA',
+  }, {
+    name: 'input',
+    type: 'string',
+    placeholder:'"clipboard" | string',
+		optional:true,
+		defaultValue:"",
+		encodeURIComponent: false,
+		onFormat:(inputString: string)=>{
+			if (inputString.length == 0) return '';
+			const prefix = "&input="
+			const suffix = inputString.trim().toLowerCase() == "clipboard") ?
+				"clipboard" :
+				`text&text=${encodeURIComponent(inputString)}`
+			return prefix + suffix
+		},
+  }]
+}
+
+//shortcuts://run-shortcut?name=Make%20PDF&input=text&text=soup
 
 /* Example for copy and paste
 export const _Type : URLSchemeType = {

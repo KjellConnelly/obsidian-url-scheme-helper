@@ -1,5 +1,5 @@
 import { mailType, obsidianType, appleMapsType, telephoneType,
-  textMessageType, calendarType, } from '../src/DefaultSchemeTypes'
+  textMessageType, calendarType, iOSShortcutType} from '../src/DefaultSchemeTypes'
 import SchemeHelper from '../src/SchemeHelper'
 
 
@@ -44,6 +44,10 @@ export default function start() {
     }}),
     schemeHelper.convertToURL({type:calendarType, title: "Open Calendar App to December 25, 2021", userInput:{
       date: "December 26, 2021"
+    }}),
+    schemeHelper.convertToURL({type:iOSShortcutType, title: "Run shortcut: Home ETA", userInput:{
+      shortcutName: "Home ETA",
+
     }}),
   ]
   allMarkdown.forEach(md=>console.log(md))
