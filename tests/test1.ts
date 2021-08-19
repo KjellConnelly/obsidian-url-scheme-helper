@@ -1,5 +1,5 @@
 import { mailType, obsidianType, appleMapsType, telephoneType,
-  textMessageType, calendarType, iOSShortcutType} from '../src/DefaultSchemeTypes'
+  textMessageType, calendarType, iOSShortcutType, youTubeiFrameType} from '../src/DefaultSchemeTypes'
 import SchemeHelper from '../src/SchemeHelper'
 
 
@@ -48,6 +48,10 @@ export default function start() {
     schemeHelper.convertToURL({type:iOSShortcutType, title: "Run shortcut: Home ETA", userInput:{
       shortcutName: "Home ETA",
 
+    }}),
+    schemeHelper.convertToURL({type:youTubeiFrameType, title: "YouTube Developers Live Video", userInput:{
+      videoID: "M7lc1UVf-VE",
+      width: "800"
     }}),
   ]
   allMarkdown.forEach(md=>console.log(md))

@@ -1,6 +1,7 @@
 import moment from 'moment'
 import { URLSchemeType, ParameterType } from './MyTypes'
 const chrono = require('chrono-node')
+import getVideoId from 'get-video-id'
 
 export const mailType : URLSchemeType = {
 	name: 'mailto',
@@ -134,7 +135,7 @@ export const iOSShortcutType : URLSchemeType = {
 		onFormat:(inputString: string)=>{
 			if (inputString.length == 0) return '';
 			const prefix = "&input="
-			const suffix = inputString.trim().toLowerCase() == "clipboard") ?
+			const suffix = (inputString.trim().toLowerCase() == "clipboard") ?
 				"clipboard" :
 				`text&text=${encodeURIComponent(inputString)}`
 			return prefix + suffix
@@ -142,7 +143,55 @@ export const iOSShortcutType : URLSchemeType = {
   }]
 }
 
-//shortcuts://run-shortcut?name=Make%20PDF&input=text&text=soup
+export const youTubeiFrameType : URLSchemeType = {
+  name: 'YouTube Video',
+  description: 'Embed YouTube video with an iFrame.',
+  format: `<iframe src="https://www.youtube.com/embed/{videoID}?{srcParams}" {width}{height}{iframeParams}></iframe>`,
+  parameters: [{
+    name : 'videoID',
+    type: 'string',
+    placeholder:'https://www.youtube.com/watch?v=M7lc1UVf-VE | M7lc1UVf-VE',
+    encodeURIComponent: false,
+		onFormat:((videoID:string)=>{
+			return getVideoId(videoID).id || videoID
+		})
+  }, {
+    name : 'width',
+    type: 'string',
+		optional: true,
+		placeholder: '640 | 100%',
+		encodeURIComponent:false,
+		onFormat:((width:string)=>{
+			return width.length > 0 ? `width="${width}" ` : ''
+		})
+  }, {
+    name : 'height',
+    type: 'string',
+		optional: true,
+		placeholder: '360 | 100%',
+		encodeURIComponent:false,
+		onFormat:((height:string)=>{
+			return height.length > 0 ? `height="${height}" ` : ''
+		})
+  }, {
+    name : 'srcParams',
+    type: 'string',
+		optional: true,
+		placeholder: 'autoplay=1 | autoplay=0&playsinline=1 | whatever',
+		encodeURIComponent:false,
+  }, {
+    name : 'iframeParams',
+    type: 'string',
+		optional: true,
+		placeholder: '',
+		encodeURIComponent:false,
+  },
+]}
+/*
+
+*/
+
+
 
 /* Example for copy and paste
 export const _Type : URLSchemeType = {
