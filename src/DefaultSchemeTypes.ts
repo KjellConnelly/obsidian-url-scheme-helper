@@ -1,11 +1,12 @@
 import moment from 'moment'
 import { URLSchemeType, ParameterType } from './MyTypes'
-const chrono = require('chrono-node')
+//const chrono = require('chrono-node')
+import chrono from 'chrono-node'
 import getVideoId from 'get-video-id'
 
 export const mailType : URLSchemeType = {
-	name: 'mailto',
-  description: 'Mail to',
+	name: 'Mail To',
+  description: 'Sends an email to 1 or many addresses with a subject and body',
 	format: '[{title}](mailto://{to}?subject={subject}?body={body})',
 	parameters: [{
 		name:'to',
@@ -187,6 +188,17 @@ export const youTubeiFrameType : URLSchemeType = {
 		encodeURIComponent:false,
   },
 ]}
+
+export const allDefaultSchemeTypes : Array<URLSchemeType> = [
+	mailType,
+	obsidianType,
+	appleMapsType,
+	telephoneType,
+	textMessageType,
+	calendarType,
+	iOSShortcutType,
+	youTubeiFrameType,
+]
 /*
 
 */

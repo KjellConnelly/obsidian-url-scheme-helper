@@ -1,11 +1,23 @@
 import type ObsidianURLSchemeHelperPlugin from './main'
+import { allDefaultSchemeTypes } from './DefaultSchemeTypes'
+import { URLSchemeType } from './MyTypes'
 
 export interface MyPluginSettings {
-	mySetting: string
+	schemeSelected: string,
+	schemesEnabled: {
+		[propName : string] : boolean
+	},
 }
 
+const defaultSchemesEnabled : {
+	[propName : string] : boolean
+} = {}
+allDefaultSchemeTypes.forEach((schemeType : URLSchemeType)=>{
+	defaultSchemesEnabled[schemeType.name] = true
+})
 const DEFAULT_SETTINGS: MyPluginSettings = {
-	mySetting: 'default'
+	schemeSelected: allDefaultSchemeTypes[0].name,
+	schemesEnabled: defaultSchemesEnabled
 }
 
 export async function loadSettings(plugin : ObsidianURLSchemeHelperPlugin) {

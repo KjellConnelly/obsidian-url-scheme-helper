@@ -1,4 +1,5 @@
 export type URLSchemeType = {
+	[propName: string] : any,
 	name : string,
 	description: string,
 	format: string,
